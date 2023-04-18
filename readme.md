@@ -7,6 +7,8 @@ Just run this little Python app and it will find every git folder on your machin
 
 This Python app scrapes your disk for git folders and generates a green square graph of your commit frequency.
 
+![Example Graph](example.png)
+
 ## Features
 - Allows users to select which root folders to look through
 - Users can input their usernames
