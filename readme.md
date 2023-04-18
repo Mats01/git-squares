@@ -1,5 +1,10 @@
 # Git Commit Frequency Graph
 
+Ever had this problem: you constantly work on some code but you have loads of git accounts on different services so your GitHub Contributions graph looks sad and empty? 
+
+**Here is the solution you've been looking for!** 
+Just run this little Python app and it will find every git folder on your machine and combine them into a Contribution graph greener than a golf course 😎
+
 This Python app scrapes your disk for git folders and generates a green square graph of your commit frequency.
 
 ## Features
