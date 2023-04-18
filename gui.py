@@ -110,7 +110,7 @@ def plot_squares(dates):
   ax.set_xticklabels([(start_date + datetime.timedelta(weeks=i)).strftime('%Y-%m-%d') for i in range(weeks)][::weeks//(40 if weeks > 40 else weeks)], rotation=90)
   
   ax.set_yticks(range(7))
-  ax.set_yticklabels(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+  ax.set_yticklabels(['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun' ])
 
   # make plot taller in y direction
   ax.set_aspect(1)
