@@ -59,6 +59,9 @@ def plot_data(dates):
     
     
 def convert_data(data):
+  
+    # limit all values above 10 to 10 to get a more readable plot
+    data = {k: min(v, 10) for k, v in data.items()}
     # Get the start and end dates from the data
     start_date = datetime.datetime.strptime(min(data.keys()), '%Y-%m-%d')
     end_date = datetime.datetime.strptime(max(data.keys()), '%Y-%m-%d')
