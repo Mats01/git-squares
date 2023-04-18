@@ -3,6 +3,9 @@ import os
 from pprint import pprint
 from os.path import expanduser
 
+from matplotlib import pyplot as plt
+import numpy as np
+
 def find_git_folders(path):
     git_folders = []
     for root, dirs, files in os.walk(path):
@@ -65,18 +68,70 @@ pprint('total distinct commit days: %d' % len(dates.keys()))
 # x axis: dates
 # y axis: number of commits
 
+# import matplotlib.pyplot as plt
+# import numpy as np
+
+# # sort dates
+# dates = sorted(dates.items(), key=lambda x: x[0])
+
+# # plot
+# plt.plot([x[0] for x in dates], [x[1] for x in dates])
+
+# # show a total of 30 dates on x axis
+# plt.xticks(np.arange(0, len(dates), len(dates)/30))
+
+# plt.xticks(rotation=90)
+# plt.show()
+
+def convert_data(data):
+    # Get the start and end dates from the data
+    start_date = datetime.datetime.strptime(min(data.keys()), '%Y-%m-%d')
+    end_date = datetime.datetime.strptime(max(data.keys()), '%Y-%m-%d')
+
+    # Calculate the number of weeks between the start and end dates
+    num_weeks = (end_date - start_date).days // 7 + 1
+
+    # Create an array to hold the converted data
+    converted_data = np.zeros((7, num_weeks), dtype=int)
+
+    # Fill in the converted data
+    for date_str, count in data.items():
+        date = datetime.datetime.strptime(date_str, '%Y-%m-%d')
+        week = (date - start_date).days // 7
+        day = date.weekday()
+        converted_data[day, week] = count
+
+    return converted_data
+
+dates = sorted(dates.items(), key=lambda x: x[0])
+
+dates = dates
+
 import matplotlib.pyplot as plt
 import numpy as np
 
-# sort dates
-dates = sorted(dates.items(), key=lambda x: x[0])
+# format date data to be used in plot
+data = convert_data(dict(dates))
 
-# plot
-plt.plot([x[0] for x in dates], [x[1] for x in dates])
+print(data)
 
-# show a total of 30 dates on x axis
-plt.xticks(np.arange(0, len(dates), len(dates)/30))
 
-plt.xticks(rotation=90)
+
+# Create a new figure and axes
+fig, ax = plt.subplots()
+
+# Plot the data as an image
+ax.imshow(data, cmap='Greens')
+
+# show 40 dates along x axis
+# step = len(dates) // 40
+# ax.set_xticks(np.arange(0, len(dates), step))
+# ax.set_xticklabels([x[0] for x in dates][::step], rotation=90)
+ax.set_yticks(range(7))
+ax.set_yticklabels(['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'])
+
+# make plot taller in y direction
+ax.set_aspect(1)
+
+# Show the plot
 plt.show()
-
